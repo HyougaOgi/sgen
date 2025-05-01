@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/HyougaOgi/sgen/internal/build"
+	"github.com/HyougaOgi/sgen/internal/clean"
 )
 
 func main() {
@@ -21,10 +22,11 @@ func main() {
 		}
 	case "serve":
 		fmt.Println("serve not implemented yet")
-
 	case "test":
 		fmt.Println("test function executed")
 		build.Walk()
+	case "clean":
+		clean.Clean()
 	default:
 		fmt.Println("Unknown command:", os.Args[1])
 		os.Exit(1)

@@ -9,23 +9,24 @@ import (
 	"github.com/gomarkdown/markdown"
 )
 
-const(
-	PATH = "./dist"
-)
-
-func Convert(html []byte, fileName string) {
+func Convert(html []byte, fileName string, path string) {
 	md := []byte(html)
+
 	markdownHTML := markdown.ToHTML(md, nil, nil)
 	fileNameWithoutExt := strings.TrimSuffix(fileName, filepath.Ext(fileName))
-	outputPath := filepath.Join(PATH, fileNameWithoutExt + ".html")
-	file , err := os.Create(outputPath)
+	outputPath := filepath.Join(path, fileNameWithoutExt+".html")
+	file, err := os.Create(outputPath)
+
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	defer file.Close()
 	_, err = file.Write(markdownHTML)
+
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	log.Printf("File %s converted to HTML and saved to %s\n", fileName, outputPath)
 }
